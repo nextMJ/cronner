@@ -56,7 +56,7 @@ final class CronnerExtension extends CompilerExtension
 				->addDefinition($this->prefix('fileStorage'))
 				->setFactory(FileStorage::class)
 				->setArgument('directory', $builder->parameters['tempDir'] . '/cronner')
-				->addTag(InjectExtension::TAG_INJECT, false);
+				->addTag(InjectExtension::TagInject, false);
 		}
 		if ($config->criticalSectionDriver === null) {
 			$builder
@@ -69,7 +69,7 @@ final class CronnerExtension extends CompilerExtension
 			->addDefinition($this->prefix('criticalSection'))
 			->setFactory(CriticalSection::class)
 			->setArgument('driver', $builder->getDefinitionByType($config->criticalSectionDriver ?? FileDriver::class))
-			->addTag(InjectExtension::TAG_INJECT, false);
+			->addTag(InjectExtension::TagInject, false);
 
 		$builder->addDefinition($this->prefix('runner'))
 			->setFactory(Cronner::class)
@@ -88,7 +88,7 @@ final class CronnerExtension extends CompilerExtension
 			}
 
 			$def->setAutowired(false);
-			$def->addTag(InjectExtension::TAG_INJECT, false);
+			$def->addTag(InjectExtension::TagInject, false);
 			$def->addTag(self::TASKS_TAG);
 		}
 
