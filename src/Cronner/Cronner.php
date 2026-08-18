@@ -61,7 +61,7 @@ class Cronner
 	/**
 	 * @param int|null $maxExecutionTime It is used only when Cronner runs
 	 */
-	public function __construct(ITimestampStorage $timestampStorage, ICriticalSection $criticalSection, int $maxExecutionTime = null, bool $skipFailedTask = true)
+	public function __construct(ITimestampStorage $timestampStorage, ICriticalSection $criticalSection, ?int $maxExecutionTime = null, bool $skipFailedTask = true)
 	{
 		$this->reflectionSupport = new ReflectionSupport();
 		$this->setTimestampStorage($timestampStorage);
@@ -156,7 +156,7 @@ class Cronner
 	/**
 	 * Runs all cron tasks.
 	 */
-	public function run(DateTimeInterface $now = null): void
+	public function run(?DateTimeInterface $now = null): void
 	{
 		if ($now === null) {
 			$now = new DateTime();
