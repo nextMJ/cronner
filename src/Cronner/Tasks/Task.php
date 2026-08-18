@@ -32,7 +32,7 @@ final class Task
 	/**
 	 * Creates instance of one task.
 	 */
-	public function __construct(object $object, ReflectionMethod $method, ITimestampStorage $timestampStorage, DateTimeInterface $now = null)
+	public function __construct(object $object, ReflectionMethod $method, ITimestampStorage $timestampStorage, ?DateTimeInterface $now = null)
 	{
 		$this->object = $object;
 		$this->method = $method;
@@ -62,7 +62,7 @@ final class Task
 	/**
 	 * Returns True if given parameters should be run.
 	 */
-	public function shouldBeRun(DateTimeInterface $now = null): bool
+	public function shouldBeRun(?DateTimeInterface $now = null): bool
 	{
 		if ($now === null) {
 			try {
