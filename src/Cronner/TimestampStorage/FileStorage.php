@@ -9,7 +9,7 @@ use DateTime;
 use DateTimeInterface;
 use Nette\SmartObject;
 use Nette\Utils\FileSystem;
-use Nette\Utils\SafeStream;
+use Nette\SafeStream\Wrapper;
 use Nette\Utils\Strings;
 use Bileto\Cronner\Exceptions\EmptyTaskNameException;
 use Bileto\Cronner\Exceptions\InvalidTaskNameException;
@@ -29,7 +29,7 @@ class FileStorage implements ITimestampStorage
 
 	public function __construct(string $directory)
 	{
-		SafeStream::register();
+		Wrapper::register();
 		$directory = rtrim($directory, DIRECTORY_SEPARATOR);
 		FileSystem::createDir($directory);
 		$this->directory = $directory;
@@ -79,6 +79,6 @@ class FileStorage implements ITimestampStorage
 			throw new EmptyTaskNameException('Task name was not set.');
 		}
 
-		return SafeStream\Wrapper::Protocol . '://' . $this->directory . '/' . sha1($this->taskName);
+		return Wrapper::Protocol . '://' . $this->directory . '/' . sha1($this->taskName);
 	}
 }
